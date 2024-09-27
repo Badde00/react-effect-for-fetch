@@ -1,10 +1,18 @@
+import UsersList from "./components/UsersList";
+import { useState, useEffect } from "react";
+
 function UsersSection() {
+  const [usersList, setUsersList] = useState([]);
+
+  useEffect(() => {
+    fetch("https://boolean-uk-api-server.fly.dev/badde00/contact")
+      .then((res) => res.json())
+      .then((data) => setUsersList(data));
+  }, []);
+
   return (
-    <section>
-      <h2>Users Section</h2>
-      <div className="scroll-container"></div>
-    </section>
-  )
+    <UsersList usersList={usersList} />
+  );
 }
 
-export default UsersSection
+export default UsersSection;
